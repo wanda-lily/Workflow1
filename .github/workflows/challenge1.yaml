@@ -1,0 +1,35 @@
+jobs:
+  job1:
+    name: job1
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+    - name: setup 
+      run: |
+        date +'%d-%m-%Y'
+        pwd
+        ls
+  
+  job2:
+    name: job2
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+    - name: setup python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    - name: check version of python
+      run: python --version
+    - name: set up pandas
+      run: |
+        pip install pandas
+        pip show pandas
+    - name: create and run script
+      run: |
+        # This creates a simple python file on the fly
+        echo "print('This is my python artifact')" > artifact.py
+        # This runs the script
+        python artifact.py
